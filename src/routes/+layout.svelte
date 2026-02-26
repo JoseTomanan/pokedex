@@ -12,7 +12,7 @@
 </svelte:head>
 
 <NavBar/>
-<div class="flex items-center bg-fixed">
+<div class="flex justify-center bg-fixed">
 	<div class="container">
 		{@render children()}
 	</div>
