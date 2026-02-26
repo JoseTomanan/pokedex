@@ -1,0 +1,89 @@
+import { PokemonType } from "./enums";
+
+
+export const TYPE_STRENGTHS = {
+  [PokemonType.Normal]: [],
+  [PokemonType.Fighting]: [PokemonType.Normal, PokemonType.Rock, PokemonType.Steel, PokemonType.Ice, PokemonType.Dark],
+  [PokemonType.Flying]: [PokemonType.Fighting, PokemonType.Bug, PokemonType.Grass],
+  [PokemonType.Poison]: [PokemonType.Grass, PokemonType.Fairy],
+  [PokemonType.Ground]: [PokemonType.Poison, PokemonType.Rock, PokemonType.Steel, PokemonType.Fire, PokemonType.Electric],
+  [PokemonType.Rock]: [PokemonType.Flying, PokemonType.Bug, PokemonType.Fire, PokemonType.Ice],
+  [PokemonType.Bug]: [PokemonType.Grass, PokemonType.Psychic, PokemonType.Dark],
+  [PokemonType.Ghost]: [PokemonType.Ghost, PokemonType.Psychic],
+  [PokemonType.Steel]: [PokemonType.Rock, PokemonType.Ice, PokemonType.Fairy],
+  [PokemonType.Fire]: [PokemonType.Bug, PokemonType.Steel, PokemonType.Grass, PokemonType.Ice],
+  [PokemonType.Water]: [PokemonType.Ground, PokemonType.Rock, PokemonType.Fire, PokemonType.Electric],
+  [PokemonType.Grass]: [PokemonType.Ground, PokemonType.Rock, PokemonType.Water],
+  [PokemonType.Electric]: [PokemonType.Flying, PokemonType.Water],
+  [PokemonType.Psychic]: [PokemonType.Fighting, PokemonType.Poison],
+  [PokemonType.Ice]: [PokemonType.Flying, PokemonType.Ground, PokemonType.Grass, PokemonType.Dragon],
+  [PokemonType.Dragon]: [PokemonType.Dragon],
+  [PokemonType.Dark]: [PokemonType.Ghost, PokemonType.Psychic],
+  [PokemonType.Fairy]: [PokemonType.Fighting, PokemonType.Dragon, PokemonType.Dark],
+};
+
+
+export const TYPE_WEAKNESSES = {
+  [PokemonType.Normal]: [PokemonType.Rock, PokemonType.Steel, PokemonType.Fighting],
+  [PokemonType.Fighting]: [PokemonType.Flying, PokemonType.Poison, PokemonType.Psychic, PokemonType.Bug, PokemonType.Ghost, PokemonType.Fairy],
+  [PokemonType.Flying]: [PokemonType.Rock, PokemonType.Steel, PokemonType.Electric],
+  [PokemonType.Poison]: [PokemonType.Poison, PokemonType.Ground, PokemonType.Rock, PokemonType.Ghost, PokemonType.Steel],
+  [PokemonType.Ground]: [PokemonType.Flying, PokemonType.Bug, PokemonType.Grass],
+  [PokemonType.Rock]: [PokemonType.Fighting, PokemonType.Ground, PokemonType.Steel],
+  [PokemonType.Bug]: [PokemonType.Fighting, PokemonType.Flying, PokemonType.Poison, PokemonType.Ghost, PokemonType.Steel, PokemonType.Fire, PokemonType.Fairy],
+  [PokemonType.Ghost]: [PokemonType.Normal, PokemonType.Dark, PokemonType.Ghost],
+  [PokemonType.Steel]: [PokemonType.Steel, PokemonType.Fire, PokemonType.Water, PokemonType.Electric],
+  [PokemonType.Fire]: [PokemonType.Rock, PokemonType.Fire, PokemonType.Water, PokemonType.Dragon],
+  [PokemonType.Water]: [PokemonType.Water, PokemonType.Grass, PokemonType.Dragon],
+  [PokemonType.Grass]: [PokemonType.Flying, PokemonType.Poison, PokemonType.Bug, PokemonType.Steel, PokemonType.Fire, PokemonType.Grass, PokemonType.Dragon],
+  [PokemonType.Electric]: [PokemonType.Ground, PokemonType.Grass, PokemonType.Electric, PokemonType.Dragon],
+  [PokemonType.Psychic]: [PokemonType.Steel, PokemonType.Psychic, PokemonType.Dark],
+  [PokemonType.Ice]: [PokemonType.Steel, PokemonType.Fire, PokemonType.Water, PokemonType.Ice],
+  [PokemonType.Dragon]: [PokemonType.Steel, PokemonType.Fairy],
+  [PokemonType.Dark]: [PokemonType.Fighting, PokemonType.Dark, PokemonType.Fairy],
+  [PokemonType.Fairy]: [PokemonType.Poison, PokemonType.Steel, PokemonType.Fire],
+};
+
+
+export const TYPE_RESISTANCE = {
+  [PokemonType.Normal]: [PokemonType.Fighting],
+  [PokemonType.Fighting]: [PokemonType.Rock, PokemonType.Bug, PokemonType.Dark],
+  [PokemonType.Flying]: [PokemonType.Fighting, PokemonType.Ground, PokemonType.Bug, PokemonType.Grass],
+  [PokemonType.Poison]: [PokemonType.Fighting, PokemonType.Poison, PokemonType.Grass, PokemonType.Fairy],
+  [PokemonType.Ground]: [PokemonType.Poison, PokemonType.Rock, PokemonType.Electric],
+  [PokemonType.Rock]: [PokemonType.Normal, PokemonType.Flying, PokemonType.Poison, PokemonType.Fire],
+  [PokemonType.Bug]: [PokemonType.Fighting, PokemonType.Ground, PokemonType.Grass],
+  [PokemonType.Ghost]: [PokemonType.Normal, PokemonType.Fighting, PokemonType.Poison, PokemonType.Bug],
+  [PokemonType.Steel]: [PokemonType.Normal, PokemonType.Flying, PokemonType.Poison, PokemonType.Rock, PokemonType.Bug, PokemonType.Steel, PokemonType.Grass, PokemonType.Psychic, PokemonType.Ice, PokemonType.Dragon, PokemonType.Fairy],
+  [PokemonType.Fire]: [PokemonType.Bug, PokemonType.Steel, PokemonType.Fire, PokemonType.Grass, PokemonType.Ice],
+  [PokemonType.Water]: [PokemonType.Steel, PokemonType.Fire, PokemonType.Water, PokemonType.Ice],
+  [PokemonType.Grass]: [PokemonType.Ground, PokemonType.Water, PokemonType.Grass, PokemonType.Electric],
+  [PokemonType.Electric]: [PokemonType.Flying, PokemonType.Steel, PokemonType.Electric],
+  [PokemonType.Psychic]: [PokemonType.Fighting, PokemonType.Psychic],
+  [PokemonType.Ice]: [PokemonType.Ice],
+  [PokemonType.Dragon]: [PokemonType.Fire, PokemonType.Water, PokemonType.Grass, PokemonType.Electric],
+  [PokemonType.Dark]: [PokemonType.Ghost, PokemonType.Psychic, PokemonType.Dark],
+  [PokemonType.Fairy]: [PokemonType.Fighting, PokemonType.Bug, PokemonType.Dragon, PokemonType.Dark],
+};
+
+
+export const TYPE_VULNERABILITY = {
+  [PokemonType.Normal]: [],
+  [PokemonType.Fighting]: [PokemonType.Flying, PokemonType.Psychic, PokemonType.Fairy],
+  [PokemonType.Flying]: [PokemonType.Rock, PokemonType.Electric, PokemonType.Ice],
+  [PokemonType.Poison]: [PokemonType.Ground, PokemonType.Psychic],
+  [PokemonType.Ground]: [PokemonType.Water, PokemonType.Grass, PokemonType.Ice],
+  [PokemonType.Rock]: [PokemonType.Fighting, PokemonType.Ground, PokemonType.Steel, PokemonType.Water, PokemonType.Grass],
+  [PokemonType.Bug]: [PokemonType.Flying, PokemonType.Rock, PokemonType.Fire],
+  [PokemonType.Ghost]: [PokemonType.Ghost, PokemonType.Dark],
+  [PokemonType.Steel]: [PokemonType.Fighting, PokemonType.Ground, PokemonType.Fire],
+  [PokemonType.Fire]: [PokemonType.Ground, PokemonType.Rock, PokemonType.Water],
+  [PokemonType.Water]: [PokemonType.Grass, PokemonType.Electric],
+  [PokemonType.Grass]: [PokemonType.Flying, PokemonType.Poison, PokemonType.Bug, PokemonType.Fire, PokemonType.Ice],
+  [PokemonType.Electric]: [PokemonType.Ground],
+  [PokemonType.Psychic]: [PokemonType.Bug, PokemonType.Ghost, PokemonType.Dark, PokemonType.Psychic],
+  [PokemonType.Ice]: [PokemonType.Fighting, PokemonType.Rock, PokemonType.Steel, PokemonType.Fire],
+  [PokemonType.Dragon]: [PokemonType.Ice, PokemonType.Dragon, PokemonType.Fairy],
+  [PokemonType.Dark]: [PokemonType.Fighting, PokemonType.Bug, PokemonType.Fairy],
+  [PokemonType.Fairy]: [PokemonType.Poison, PokemonType.Steel],
+};
