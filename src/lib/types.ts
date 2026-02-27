@@ -11,7 +11,7 @@ export interface SpeciesShort {
   details: SpeciesDetails;
 }
 
-export interface SpeciesDetails {
+export interface SpeciesDetails extends SpeciesShort {
   height: number;
   weight: number;
   stats: {base_stat: number, effort: number, stat: Resource[]}[]
