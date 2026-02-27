@@ -2,10 +2,22 @@
   import pokeball from '$lib/assets/pokeball.svg';
 
   function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    const start = window.scrollY;
+    const duration = 200;
+    const startTime = performance.now();
+
+    function animateScroll(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+      window.scrollTo(0, start * (1 - ease(progress)));
+
+      if (progress < 1)
+        requestAnimationFrame(animateScroll);
+    }
+
+    requestAnimationFrame(animateScroll);
   }
 </script>
 

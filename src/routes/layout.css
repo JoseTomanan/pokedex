@@ -101,9 +101,13 @@
   }
 
   nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
     padding: 1rem;
     @apply shadow;
-    background-color: var(--color-sidebar);
+    @apply bg-sidebar/50;
+    @apply backdrop-blur-lg;
     color: var(--color-sidebar-foreground);
 
     & > .header-links {
