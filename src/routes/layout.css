@@ -109,8 +109,8 @@
     z-index: 30;
     padding: 1rem;
     @apply shadow;
-    @apply bg-sidebar/50;
-    @apply backdrop-blur-lg;
+    @apply bg-sidebar/90;
+    @apply backdrop-blur-sm;
     color: var(--color-sidebar-foreground);
 
     @apply transition-colors duration-200;
