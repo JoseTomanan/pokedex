@@ -114,12 +114,6 @@
       }
     }
   }
-
-  button {
-    @apply border border-border;
-    background-color: var(--color-card);
-    text-color: var(--color-foreground);
-  }
 }
 
 
