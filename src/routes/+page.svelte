@@ -1,24 +1,46 @@
 <script lang="ts">
-  import { Root as DialogRoot } from "@/components/ui/dialog/index";
+  import { Root as DialogRoot } from "@/components/ui/dialog";
+  import { Skeleton } from "@/components/ui/skeleton";
 
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import type { Resource, SpeciesDetails, SpeciesShort } from "@/types"
   
   import SearchBar from "./SearchBar.svelte";
   import SpeciesCard from "@/components/SpeciesCard.svelte";
 	import SpeciesDialog from "@/components/SpeciesDialog.svelte";
 
-  let isLoading: boolean = false;
+  let isLoading: boolean = $state(false);
+  let isHasMore: boolean = $state(true);
+  let sentinel = $state<HTMLDivElement>();
 
   let speciesList: SpeciesShort[] = $state([]);
-  let previousUrl: string = $state("");
-  let nextUrl: string = $state("");
+  let previousUrl: string = "";
+  let nextUrl: string = "BABABA";
+
+  let observer: IntersectionObserver;
 
   onMount(() => {
     fetchItemsFromLink("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10");
+
+    observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+              console.log("The observer has been triggered:"+nextUrl);
+              fetchItemsFromLink(nextUrl);
+            }
+          });
+
+    if (sentinel)
+      observer.observe(sentinel);
+
+    return () => observer.disconnect();
   });
 
   async function fetchItemsFromLink(url: string) {
+    if (isLoading || !isHasMore)
+      return;
+
+    console.log("Fetching from "+url);
+    
     isLoading = true;
     try {
       const response = await fetch(url);
@@ -39,6 +61,12 @@
       
       previousUrl = result.previous;
       nextUrl = result.next;
+
+      await tick();
+      if (sentinel && observer) {
+        observer.unobserve(sentinel);
+        observer.observe(sentinel);
+      }
     } catch (e) {
       alert("There was an error in fetching from PokeAPI:"+e)
     } finally {
@@ -57,6 +85,18 @@
         <SpeciesDialog {...speciesItem.details} />
       </DialogRoot>
     {/each}
+    {#if isLoading}
+      {#each { length: 6} as _, index}
+        <Skeleton class="bg-muted-foreground/25"/>
+      {/each}
+    {/if}
+    {#if isHasMore}
+      <div bind:this={sentinel}></div>
+    {:else}
+      <div class="w-full flex justify-center items-center">
+        <h4>End of list.</h4>
+      </div>
+    {/if}
   </div>
   <!-- TODO: add skeleton for when loading -->
 </div>
