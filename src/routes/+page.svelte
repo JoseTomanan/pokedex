@@ -22,12 +22,12 @@
   onMount(() => {
     fetchItemsFromLink("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10");
 
-    observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-              console.log("The observer has been triggered:"+nextUrl);
-              fetchItemsFromLink(nextUrl);
-            }
-          });
+    observer = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting)
+                fetchItemsFromLink(nextUrl);
+            }, { rootMargin: '200px' }
+            );
 
     if (sentinel)
       observer.observe(sentinel);
@@ -86,7 +86,7 @@
       </DialogRoot>
     {/each}
     {#if isLoading}
-      {#each { length: 6} as _, index}
+      {#each { length: 6 } as _}
         <Skeleton class="bg-muted-foreground/25"/>
       {/each}
     {/if}
