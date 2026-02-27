@@ -14,3 +14,5 @@ export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?:
 
 
 export const getIdAsParam = (id: number) => id.toString().padStart(3, '0');
+
+export const nameCase = (name: string) => name.charAt(0).toUpperCase() + name.slice(1);

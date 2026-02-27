@@ -6,7 +6,7 @@
 	import { TYPE_BG_COLORS, TYPE_RING_COLORS } from "@/constants";
 
   import type { SpeciesShort, SpeciesDetails } from "@/types";
-	import { getIdAsParam } from "@/utils";
+	import { getIdAsParam, nameCase } from "@/utils";
 	import { onMount } from "svelte";
 
   const idParam: string = $derived(getIdAsParam(id));
@@ -43,7 +43,7 @@
                   hover:ring-2 hover:bg hover:border-card`}>
   <div class="flex flex-row justify-between items-center gap-1 w-full">
     <h4 class="font-semibold">
-      {name.charAt(0).toUpperCase() + name.slice(1)}
+      {nameCase(name)}
     </h4>
     <h6 class="font-mono z-2 leading-none bg-card/60 text-foreground/90">
       #{idParam}
