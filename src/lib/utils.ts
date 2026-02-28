@@ -1,5 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { BASE_FETCH_LINK } from "@/constants";
+import type { NameIdPair } from "@/types";
+
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -13,7 +16,7 @@ export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
 
 
-/* ======== Utility Functions ========*/
+/* ================ Utility Functions ================*/
 export function getIdFromUrl(str: string): string | null {
 	const parts = str.split('/');
 	if (parts.length < 3) {
@@ -22,7 +25,6 @@ export function getIdFromUrl(str: string): string | null {
 	const candidate = parts[parts.length - 2];
 	return /^\d+$/.test(candidate) ? candidate : null;
 }
-
 
 export const getIdAsParam = (id: number) => id.toString().padStart(3, '0');
 
@@ -33,3 +35,17 @@ export const titleCase = (str: string) => (str.replace(/-/g, " ")
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
 );
+
+
+/* ================ API Functions ================*/
+export async function fetchNameIdPairs() {
+  const response = await fetch(BASE_FETCH_LINK+"/?offset=0&limit=2000");
+  const data = await response.json();
+
+  const returnableList: NameIdPair[] = [];
+
+  for (const item of data.results)
+    returnableList.push({...item, id: Number(getIdFromUrl(item.url))} as NameIdPair);
+
+  return returnableList;
+}
