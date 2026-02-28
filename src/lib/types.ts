@@ -7,13 +7,13 @@ export interface Resource {
 export interface StatData {
   base_stat: number;
   effort: number;
-  stat: Resource[];
+  stat: Resource;
 }
 
 export interface AbilityData {
   is_hidden: boolean;
   slot: number;
-  ability: Resource[];
+  ability: Resource;
 }
 
 
@@ -29,6 +29,8 @@ export interface SpeciesShort {
 export interface SpeciesDetails extends SpeciesShort {
   height: number;
   weight: number;
+  order: number;
+  species: Resource;
   stats: StatData[];
   abilities: AbilityData[];
 }
