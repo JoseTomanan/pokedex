@@ -3,6 +3,8 @@
   
   let details: SpeciesDetails = $derived(inputDetails);
 
+  // TODO: when it closes, load what was already stored in backend. if not stored, only then you fetch from new link.
+
   import MdiArrowBack from "~icons/mdi/arrow-back";
   import MdiArrowForward from "~icons/mdi/arrow-forward";
 
@@ -11,6 +13,7 @@
 	import { titleCase, getIdAsParam, nameCase } from "@/utils";
 	import { onMount } from "svelte";
 	import { TYPE_BG_COLORS, TYPE_WEAKNESSES } from "@/constants";
+	import { Skeleton } from "./ui/skeleton";
 
   const idParam: string = $derived(getIdAsParam(details.id));
   const imageBackdropColor = $derived( TYPE_BG_COLORS[details.types[0] as keyof typeof TYPE_BG_COLORS] )
@@ -25,30 +28,32 @@
     )
   );
 
-  let isImageLoading: boolean = $state(true);
+  let isImageLoading: boolean = $state(false);
   let thumbnailImageLink: string = $derived(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${idParam}.png`);
   let imageSrc = $state();
 
   onMount(async () => {
+    console.log("Child "+details.id+" has been opened");
+    // svelte-ignore state_referenced_locally
+    console.log(inputDetails.id+" vs "+details.id);
     fetchImage();
   }); 
 
   async function fetchImage() {
     imageSrc = undefined;
+    isImageLoading = true;
 
     const img = new Image();
-
     img.src = thumbnailImageLink;
-    img.onload = () => {
-      imageSrc = thumbnailImageLink;
-      isImageLoading = false;
-    }
+  
+    await img.decode();
 
-    img.onerror = () => isImageLoading = false;
+    imageSrc = thumbnailImageLink;
+    isImageLoading = false;
   }
 
   async function fetchNewDetails(id: number) {
-    console.log(id);
+    console.log("FETCHING FROM "+id);
 
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -105,15 +110,15 @@
     <span class={`${imageBackdropColor} absolute size-48 rounded-full opacity-40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10`}
             aria-hidden="true"
             ></span>
-    {#if isImageLoading}
-      <span class="rounded-full w-48 m-8 relative"
-              aria-hidden="true"
-              ></span>
-    {:else}
-      <img src={imageSrc as string}
-            alt="Pokemon"
-            class="w-64 h-auto relative"/>
-    {/if}
+    <div class="h-64">
+      {#if isImageLoading}
+        <Skeleton class="grayscale-90 rounded-full size-32 my-8 relative" />
+      {:else}
+        <img src={imageSrc as string}
+              alt="Pokemon"
+              class="w-64 h-auto relative"/>
+      {/if}
+    </div>
   </div>
   <pokemon-details class="flex flex-col justify-between space-y-1">
     <div class="flex flex-row gap-1 w-full">
