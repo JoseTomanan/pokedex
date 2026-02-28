@@ -70,7 +70,7 @@
         {/each}
       </div>
       {#if isImageLoading}
-        <Skeleton class="rounded-full size-26 bg-muted-foreground/25"/>
+        <Skeleton class="rounded-full size-26 mr-20 grayscale-75"/>
       {:else}
         <img src={imageSrc as string}
               alt={name}
