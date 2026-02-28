@@ -45,9 +45,9 @@
     <h4 class="font-semibold">
       {nameCase(name)}
     </h4>
-    <h6 class="font-mono z-2 leading-none bg-card/60 text-foreground/90">
+    <h4 class="font-mono z-2 leading-none bg-card text-foreground/60">
       #{idParam}
-    </h6>
+    </h4>
   </div>
   <div class="flex flex-row justify-between items-end w-full">
     <div class="flex flex-row gap-1">
