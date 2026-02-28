@@ -1,8 +1,7 @@
 <script lang="ts">
   const inputDetails: SpeciesDetails = $props();
   
-  // svelte-ignore state_referenced_locally
-  let details: SpeciesDetails = $state(inputDetails);
+  let details: SpeciesDetails = $derived(inputDetails);
 
   import MdiArrowBack from "~icons/mdi/arrow-back";
   import MdiArrowForward from "~icons/mdi/arrow-forward";
