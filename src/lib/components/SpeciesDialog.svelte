@@ -1,17 +1,44 @@
 <script lang="ts">
   const details: SpeciesDetails = $props();
+  
+  import MdiArrowBack from "~icons/mdi/arrow-back";
+  import MdiArrowForward from "~icons/mdi/arrow-forward";
 
 	import type { SpeciesDetails } from "@/types";
   import * as Dialog from "./ui/dialog";
-	import { getIdAsParam, nameCase } from "@/utils";
+	import { titleCase, getIdAsParam, nameCase } from "@/utils";
 	import { onMount } from "svelte";
-	import { Skeleton } from "./ui/skeleton";
 	import { TYPE_BG_COLORS, TYPE_WEAKNESSES } from "@/constants";
-	import { types } from "util";
 
   const idParam: string = $derived(getIdAsParam(details.id));
 
+  const imageBackdropColor = $derived( TYPE_BG_COLORS[details.types[0] as keyof typeof TYPE_BG_COLORS] )
+
+  const statsHalves = $derived( [details.stats.slice(0, 3), details.stats.slice(3)] );
+
+  const typeWeaknesses = $derived(
+    Array.from(
+      new Set(
+        details.types
+          .flatMap((type) => TYPE_WEAKNESSES[type as keyof typeof TYPE_WEAKNESSES])
+      )
+    )
+  );
+
+  let isImageLoading: boolean = $state(true);
+  let thumbnailImageLink: string = $derived(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${idParam}.png`);
+  let imageSrc = $state();
+
   onMount(async () => {
+    const img = new Image();
+
+    img.src = thumbnailImageLink;
+    img.onload = () => {
+      imageSrc = thumbnailImageLink;
+      isImageLoading = false;
+    }
+
+    img.onerror = () => isImageLoading = false;
   }); 
 
   async function fetchNewDetails() {
@@ -23,58 +50,109 @@
 {#snippet manyTypesBlock(types: string[])}
   {#each types as type}
     {@const bgColor = TYPE_BG_COLORS[type as keyof typeof TYPE_BG_COLORS]}
-    <h6 class={`${bgColor} w-fit px-1 rounded-sm`}>
+    <span class={`${bgColor} text-foreground w-fit px-1 rounded-sm text-xs`}>
       {type}
-    </h6>
+    </span>
   {/each}
 {/snippet}
 
-<Dialog.Content class="border-none overflow-clip">
-  <Dialog.Header>
-    <Dialog.Title>
-      {nameCase(details.name)}
-      <span class="font-mono opacity-80">
-        #{idParam}
-      </span>
-    </Dialog.Title>
-    <Dialog.Close></Dialog.Close>
-  </Dialog.Header>
-  <pokemon-details>
-    <!-- TODO: styling -->
-    <div class="flex justify-between items-start">
-      <div class="space-y-1 leading-none">
-        {@render manyTypesBlock(details.types)}
-        <h6>Height: {details.height} cm</h6>
-        <h6>Weight: {details.weight} kg</h6>
-        <h6>Stats: {details.stats}</h6>
-        <h6 class="">
-          <!-- TODO: FINISH -->
-          <b>WEAKNESSES:</b> <br>
-          {#each details.types as type}
-            {@const typeWeaknesses = TYPE_WEAKNESSES[type as keyof typeof TYPE_WEAKNESSES]}
-            {@render manyTypesBlock(typeWeaknesses)}
-          {/each}
-        </h6>
+
+<Dialog.Content class="border-none overflow-clip" showCloseButton={false}>
+  <Dialog.Header class="flex flex-row items-center justify-between z-10">
+    <button class={"transition " + (details.id == 1350 ? "opacity-0 -z-100" : "")}
+            onclick={() => {}}>
+      <MdiArrowBack />
+      #{getIdAsParam(details.id-1)}
+    </button>
+    <Dialog.Title class="flex flex-col items-center *:space-x-0.5">
+      <div>
+        {nameCase(details.name)}
+        <span class="font-mono opacity-70">#{idParam}</span>
       </div>
-      <img src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${idParam}.png`}
+      <div>
+        {@render manyTypesBlock(details.types)}
+      </div>
+    </Dialog.Title>
+    <button class={"transition " + (details.id == 1350 ? "opacity-0 -z-100" : "")}
+            onclick={() => {}}>
+      #{getIdAsParam(details.id+1)}
+      <MdiArrowForward />
+    </button>
+  </Dialog.Header>
+  <div class="relative flex justify-center -my-4">
+    <span class={`${imageBackdropColor} absolute size-48 rounded-full opacity-40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10`}
+            aria-hidden="true"
+            ></span>
+    {#if isImageLoading}
+      <span class="rounded-full w-48 m-8 relative"
+              aria-hidden="true"
+              ></span>
+    {:else}
+      <img src={imageSrc as string}
             alt="Pokemon"
-            class="size-128 -z-10 opacity-20 -ml-48 -mt-36 -mb-40" />
-    </div>
-  </pokemon-details>
-  <div class="flex flex-row justify-between text-xs">
-    <button>Previous</button>
-    <button>Next</button>
+            class="w-64 h-auto relative"/>
+    {/if}
   </div>
+  <pokemon-details class="flex flex-col justify-between space-y-1">
+    <div class="flex flex-row gap-1 w-full">
+      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
+                    [&>h6]:font-medium [&>p]:font-light">
+        <h6>HEIGHT</h6>
+        <p>{(details.height * 0.10).toFixed(1)} m</p>
+      </div>
+      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
+                    [&>h6]:font-medium [&>p]:font-light">
+        <h6>WEIGHT</h6>
+        <p>{details.weight} kg</p>
+      </div>
+      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
+                    [&>h6]:font-medium [&>p]:font-light">
+        <h6>SPECIES</h6>
+        <p>{nameCase(details.species.name)}</p>
+      </div>
+      <div class="hidden sm:flex sm:flex-col
+                    card h-fit -space-y-0.5 leading-0 text-center flex-1
+                    [&>h6]:font-medium [&>p]:font-light">
+        <h6>ORDER</h6>
+        <p>{details.order}</p>
+      </div>
+    </div>
+    <stats class="card flex flex-col sm:flex-row">
+      {#each statsHalves as statsHalf}
+        <div class="flex-1">
+          {#each statsHalf as s}
+            <span class="flex flex-row gap-2 [&>h6]:flex-1">
+              <h6 class="font-semibold">{s.stat.name == "hp" ? "HP" : titleCase(s.stat.name)}</h6>
+              <h6 class="font-light">{s.base_stat}</h6>
+            </span>
+          {/each}
+        </div>
+      {/each}
+    </stats>
+    <weaknesses class="flex space-x-1 items-baseline p-2 rounded bg-card border border-border">
+      <span class="text-xs mr-1.5 font-semibold">WEAKNESSES</span>
+      <div class="flex flex-wrap gap-1 leading-none items-start">
+        {@render manyTypesBlock(typeWeaknesses)}
+      </div>
+    </weaknesses>
+  </pokemon-details>
 </Dialog.Content>
 
 
 <style>
   button {
-    background-color: var(--color-white);
-    color: var(--accent-foreground);
+    color: var(--input-foreground);
     border-radius: calc(var(--radius) - 6px);
-    border-color: var(--accent);
-    border-width: 1px;
-    padding-inline: var(--spacing);
+    opacity: 30%;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  button:hover {
+    opacity: 70%;
   }
 </style>
