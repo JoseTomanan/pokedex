@@ -1,6 +1,9 @@
 import { PokemonType } from "./enums";
 
 
+export const BASE_FETCH_LINK = "https://pokeapi.co/api/v2/pokemon";
+
+
 export const TYPE_STRENGTHS = {
   [PokemonType.Normal]: [],
   [PokemonType.Fighting]: [PokemonType.Normal, PokemonType.Rock, PokemonType.Steel, PokemonType.Ice, PokemonType.Dark],
