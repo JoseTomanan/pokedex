@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { Root as DialogRoot } from "@/components/ui/dialog";
   import { Skeleton } from "@/components/ui/skeleton";
 
-  import { onMount, tick } from "svelte";
+  import { getContext, onMount, tick } from "svelte";
   import type { Resource, SpeciesDetails, SpeciesShort } from "@/types"
   
   import SearchBar from "./SearchBar.svelte";
@@ -12,6 +11,8 @@
   let isLoading: boolean = $state(false);
   let isHasMore: boolean = $state(true);
   let sentinel = $state<HTMLDivElement>();
+
+  let searchQuery: string = getContext("searchQueryContext");
 
   let speciesList: SpeciesShort[] = $state([]);
   let previousUrl: string = "";
@@ -38,8 +39,6 @@
   async function fetchItemsFromLink(url: string) {
     if (isLoading || !isHasMore)
       return;
-
-    console.log("Fetching from "+url);
     
     isLoading = true;
     try {
@@ -81,10 +80,8 @@
   <SearchBar/>
   <div class="card-grid">
     {#each speciesList as speciesItem}
-      <DialogRoot>
-        <SpeciesCard {...speciesItem} />
-        <SpeciesDialog {...speciesItem.details} />
-      </DialogRoot>
+      <SpeciesCard {...speciesItem} 
+                details={speciesItem.details} />
     {/each}
     {#if isLoading}
       {#each { length: 6 } as _}
