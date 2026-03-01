@@ -63,8 +63,25 @@
 
 /* ======================== BASE ======================== */
 @layer base {
+  button,
+  a,
+  input,
+  textarea,
+  article,
+  span {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, gap;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
+    background-image: var(--background-circuit-board);
+    background-attachment: fixed;
     color: var(--color-foreground);
     padding-top: 4.75rem;   /* For navbar */
   }
