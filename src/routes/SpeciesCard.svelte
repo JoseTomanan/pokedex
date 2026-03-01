@@ -8,8 +8,8 @@
   if (!details)
     throw new Error("Expected 'details' to be defined in SpeciesCard props");
 
-  import * as Dialog from "./ui/dialog";
-  import { Skeleton } from "./ui/skeleton";
+  import * as Dialog from "@/components/ui/dialog";
+  import { Skeleton } from "@/components/ui/skeleton";
 	import { TYPE_BG_COLORS, TYPE_RING_COLORS } from "@/constants";
 
   import type { SpeciesShort, SpeciesDetails } from "@/types";

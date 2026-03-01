@@ -3,15 +3,23 @@
   
   let details: SpeciesDetails = $derived(initialDetails);
 
+  // svelte-ignore state_referenced_locally
+  if (!details)
+    throw new Error("Expected 'details' to be defined in SpeciesDialog props");
+
+  // svelte-ignore state_referenced_locally
+  if (!details.types)
+    throw new Error("Expected 'details.types' to be defined in SpeciesDialog props");
+
   import MdiArrowBack from "~icons/mdi/arrow-back";
   import MdiArrowForward from "~icons/mdi/arrow-forward";
 
 	import type { SpeciesDetails } from "@/types";
-  import * as Dialog from "./ui/dialog";
+  import * as Dialog from "../lib/components/ui/dialog";
 	import { titleCase, getIdAsParam, nameCase } from "@/utils";
 	import { onMount } from "svelte";
 	import { TYPE_BG_COLORS, TYPE_WEAKNESSES } from "@/constants";
-	import { Skeleton } from "./ui/skeleton";
+	import { Skeleton } from "@/components/ui/skeleton";
 
   const idParam: string = $derived(getIdAsParam(details.id));
   const imageBackdropColor = $derived( TYPE_BG_COLORS[details.types[0] as keyof typeof TYPE_BG_COLORS] )
@@ -92,7 +100,7 @@
         <span class="font-mono opacity-70">#{idParam}</span>
       </div>
       <div>
-        {@render manyTypesBlock(details.types)}
+        {@render manyTypesBlock(details.types!)}
       </div>
     </Dialog.Title>
     <div class="flex-1 flex justify-end">
