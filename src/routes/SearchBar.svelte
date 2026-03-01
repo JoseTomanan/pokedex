@@ -9,7 +9,6 @@
   import { Input } from "$lib/components/ui/input/index";
 
 	import * as Select from "@/components/ui/select";
-	import type { SearchBarProps } from "@/context";
   
   const SORT_CHOICES = ["id", "name"];
   const FILTER_CHOICES = ["id", "name"];
@@ -21,7 +20,7 @@
 </script>
 
 
-<div class="flex flex-col justify-center items-center gap-1
+<div class="flex flex-col justify-center items-center gap-0.5
               md:flex-row">
   <div class="relative flex flex-row items-center justify-center w-full">
     <Input id="searchQuery"
@@ -33,7 +32,7 @@
     <MdiSearch class="grow size-4 m-auto text-input-foreground 
                         absolute top-1/2 -translate-1/2 right-0 pointer-events-none" />
   </div>
-  <div class="flex flex-row justify-center items-center w-full gap-x-1">
+  <div class="flex flex-row justify-center items-center w-full gap-x-0.5">
     <Select.Root type="single"
                   name="sort"
                   bind:value={sortValue}>
