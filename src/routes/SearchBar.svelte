@@ -41,7 +41,7 @@
     <MdiSearch class="grow size-4 m-auto text-input-foreground 
                         absolute top-1/2 -translate-1/2 right-0 pointer-events-none" />
   </div>
-  <div class="flex flex-row justify-center items-center w-full gap-x-0.5">
+  <div class="flex flex-row-reverse justify-center items-center w-full gap-x-0.5">
     <div class="flex flex-row w-3/5">
       <Select.Root type="single"
                     name="sort"
