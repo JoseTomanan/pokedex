@@ -119,6 +119,14 @@
   }
 
 
+  // ================ Scrolling loading ================
+  let isItemsReady = $state(false);
+  $effect(() => {
+    if (speciesListDerived.length > 0) {
+      tick().then(() => isItemsReady = true);
+    }
+  });
+
   // ================ On mount ================
   onMount(() => {
     observer = new IntersectionObserver(
@@ -158,9 +166,13 @@
       {/if}
     {/each}
 
-    {#if isLoading || isHasMore}
+    {#if !isItemsReady}
+      {#each { length: 20 } as _}
+        <Skeleton class="bg-muted-foreground/25 h-35.5 rounded-lg"/>
+      {/each}
+    {:else if isLoading || isHasMore}
       {#each { length: 4 } as _}
-        <Skeleton class="bg-muted-foreground/25 min-h-32"/>
+        <Skeleton class="bg-muted-foreground/25 min-h-24 rounded-lg"/>
       {/each}
     {/if}
   </div>
