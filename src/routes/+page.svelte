@@ -146,17 +146,19 @@
         <SpeciesCard {...speciesItem} />
       {/each}
     {:else}
-      {#each { length: 20 } as _}
+      {#each { length: 18 } as _}
         <Skeleton class="bg-muted-foreground/25 min-h-32"/>
       {/each}
     {/if}
 
     {#if isLoading || isHasMore}
-      {#each { length: 12 } as _}
+      {#each { length: 6 } as _}
         <Skeleton class="bg-muted-foreground/25 min-h-32"/>
       {/each}
     {/if}
 
+    <!-- FIXME: this never renders -->
+     <!-- TODO: fix state of isHasMore -->
     {#if isHasMore}
       <div bind:this={sentinel}></div>
     {:else}
