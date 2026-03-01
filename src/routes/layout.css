@@ -78,6 +78,23 @@
     scroll-behavior: smooth;
   }
 
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+    border: 2px solid var(--border);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--muted-foreground) 70%, transparent 30%);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+  ::-webkit-scrollbar-corner {
+    background: var(--background);
+  }
+
   body {
     background-color: var(--color-background);
     background-image: var(--background-circuit-board);
