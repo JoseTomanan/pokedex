@@ -1,7 +1,7 @@
 <script lang="ts">
   const initialDetails: SpeciesDetails = $props();
-  
-  let details: SpeciesDetails = $derived(initialDetails);
+  // svelte-ignore state_referenced_locally
+  let details: SpeciesDetails = $state({ ...initialDetails });
 
   // svelte-ignore state_referenced_locally
   if (!details)
@@ -60,6 +60,14 @@
   async function fetchNewDetails(id: number) {
     // console.log("FETCHING FROM "+id);
     isNewDetailsLoading = true;
+    isImageLoading = true;
+    details.id = id;
+    details.name = "LOADING";
+    details.types = [" "];
+    details.height = -1;
+    details.weight = -1;
+    details.order = -1;
+    details.species = {name: ".", url: ""};
 
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -100,7 +108,11 @@
     </div>
     <Dialog.Title class="flex flex-col items-center *:space-x-0.5 flex-1">
       <div class="flex flex-wrap justify-center gap-1">
+        {#if isNewDetailsLoading}
+          <Skeleton class="grayscale-100 w-16 h-4 rounded-none"/>
+        {:else}
         <span>{nameCase(details.name)}</span>
+        {/if}
         <span class="font-mono opacity-70">#{idParam}</span>
       </div>
       <div>
@@ -123,7 +135,8 @@
             ></span>
     <div class="h-64">
       {#if isImageLoading}
-        <Skeleton class="grayscale-90 rounded-full size-32 my-8 relative" />
+        <Skeleton class="bg-foreground/50 rounded-full size-32
+                    top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 relative" />
       {:else}
         <img src={imageSrc as string}
               alt="Pokemon"
@@ -171,7 +184,7 @@
     </stats>
 
     <weaknesses class="flex space-x-0.5 items-baseline p-2 rounded bg-card border border-border
-                  md:h-10">
+                  sm:h-10">
       <span class="text-sm mr-2 font-semibold shrink-0">Weak against:</span>
       <div class="flex flex-wrap gap-1 leading-none items-start px-1 bg-card/60">
         {@render manyTypesBlock(typeWeaknesses)}
