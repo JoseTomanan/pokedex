@@ -1,26 +1,16 @@
-# sv
+# Pokédex in Svelte
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This is a frontend project by Jose Tomanan that operates off of the [official PokéAPI](https://pokeapi.co/docs/v2), to allow browsing of Pokémon, as well searching, sorting, and filtering by their ID number or name.
 
-## Creating a project
+Keep reading below to see how to set up the environment and launch the server.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Installing dependencies
 
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv create --template minimal --types ts --add prettier eslint tailwindcss="plugins:typography,forms" --install npm pokedex
-```
+If this is the first time you're opening this app, install dependencies using `npm ci` (or `pnpm install` or `yarn`).
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've installed dependencies, start a development server:
 
 ```sh
 npm run dev
@@ -31,7 +21,7 @@ npm run dev -- --open
 
 ## Building
 
-To create a production version of your app:
+To create a production version of the app:
 
 ```sh
 npm run build
@@ -39,4 +29,12 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
+<!-- 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> -->
+
+# Credits
+
+- [SVGs for types](https://github.com/duiker101/pokemon-type-svg-icons/tree/master/icons)
+- [Background hero pattern](https://heropatterns.com/)
+- [Pokéball logo](https://commons.wikimedia.org/wiki/File:Pok%C3%A9_Ball_icon.svg)
