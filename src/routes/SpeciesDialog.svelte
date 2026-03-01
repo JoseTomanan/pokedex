@@ -5,11 +5,11 @@
 
   // svelte-ignore state_referenced_locally
   if (!details)
-    throw new Error("Expected 'details' to be defined in SpeciesDialog props");
+    throw new Error("'details' not defined in SpeciesDialog props.");
 
   // svelte-ignore state_referenced_locally
   if (!details.types)
-    throw new Error("Expected 'details.types' to be defined in SpeciesDialog props");
+    throw new Error("'details.types' not defined in SpeciesDialog props. ID="+details.id);
 
   import MdiArrowBack from "~icons/mdi/arrow-back";
   import MdiArrowForward from "~icons/mdi/arrow-forward";

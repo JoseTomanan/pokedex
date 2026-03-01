@@ -3,10 +3,10 @@
 
   // svelte-ignore state_referenced_locally
   if (!types)
-    throw new Error("Expected 'types' to be defined in SpeciesCard props");
+    throw new Error("'types' not defined in SpeciesCard props. ID="+id);
   // svelte-ignore state_referenced_locally
   if (!details)
-    throw new Error("Expected 'details' to be defined in SpeciesCard props");
+    throw new Error("'details' not defined in SpeciesCard props. ID="+id);
 
   import * as Dialog from "@/components/ui/dialog";
   import { Skeleton } from "@/components/ui/skeleton";
