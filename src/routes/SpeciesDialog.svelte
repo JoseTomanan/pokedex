@@ -18,7 +18,7 @@
   import * as Dialog from "../lib/components/ui/dialog";
 	import { titleCase, getIdAsParam, nameCase } from "@/utils";
 	import { onMount } from "svelte";
-	import { TYPE_BG_COLORS, TYPE_WEAKNESSES } from "@/constants";
+	import { MAX_COUNT, TYPE_BG_COLORS, TYPE_WEAKNESSES } from "@/constants";
 	import { Skeleton } from "@/components/ui/skeleton";
 
   const idParam: string = $derived(getIdAsParam(details.id));
@@ -34,6 +34,7 @@
     )
   );
 
+  let isNewDetailsLoading: boolean = $state(false);
   let isImageLoading: boolean = $state(false);
   let thumbnailImageLink: string = $derived(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${idParam}.png`);
   let imageSrc = $state();
@@ -58,6 +59,7 @@
 
   async function fetchNewDetails(id: number) {
     // console.log("FETCHING FROM "+id);
+    isNewDetailsLoading = true;
 
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -69,6 +71,8 @@
       fetchImage();
     } catch {
       console.log("Error fetching new details.");
+    } finally {
+      isNewDetailsLoading = false;
     }
   }
 </script>
@@ -77,7 +81,7 @@
 {#snippet manyTypesBlock(types: string[])}
   {#each types as type}
     {@const bgColor = TYPE_BG_COLORS[type as keyof typeof TYPE_BG_COLORS]}
-    <span class={`${bgColor} text-foreground w-fit px-1 rounded-sm text-xs`}>
+    <span class={`${bgColor} text-foreground w-fit px-1 rounded-sm text-xs font-medium`}>
       {type}
     </span>
   {/each}
@@ -86,7 +90,7 @@
 
 <Dialog.Content class="border-none" showCloseButton={false}>
   <Dialog.Header class="flex flex-row items-center justify-between z-10 [&>button]:transition">
-    <div class="flex-1">
+    <div class="min-w-1/5">
       <button onclick={() => fetchNewDetails(details.id-1)}>
         {#if details.id != 1}
           <MdiArrowBack />
@@ -95,23 +99,24 @@
       </button>
     </div>
     <Dialog.Title class="flex flex-col items-center *:space-x-0.5 flex-1">
-      <div class="flex flex-col justify-center gap-1 sm:flex-row">
-        {nameCase(details.name)}
+      <div class="flex flex-wrap justify-center gap-1">
+        <span>{nameCase(details.name)}</span>
         <span class="font-mono opacity-70">#{idParam}</span>
       </div>
       <div>
         {@render manyTypesBlock(details.types!)}
       </div>
     </Dialog.Title>
-    <div class="flex-1 flex justify-end">
+    <div class="min-w-1/5 flex justify-end">
       <button onclick={() => fetchNewDetails(details.id+1)}>
-        {#if details.id != 1350}
+        {#if details.id != MAX_COUNT}
           #{getIdAsParam(details.id+1)}
           <MdiArrowForward />
         {/if}
       </button>
     </div>
   </Dialog.Header>
+
   <div class="relative flex justify-center -my-4">
     <span class={`${imageBackdropColor} absolute size-48 rounded-full opacity-40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10`}
             aria-hidden="true"
@@ -126,6 +131,7 @@
       {/if}
     </div>
   </div>
+
   <pokemon-details class="flex flex-col justify-between space-y-1">
     <div class="flex flex-row gap-1 w-full">
       <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
@@ -150,6 +156,7 @@
         <p>{details.order}</p>
       </div>
     </div>
+
     <stats class="card flex flex-col sm:flex-row">
       {#each statsHalves as statsHalf}
         <div class="flex-1">
@@ -162,9 +169,11 @@
         </div>
       {/each}
     </stats>
-    <weaknesses class="flex space-x-1 items-baseline p-2 rounded bg-card border border-border">
+
+    <weaknesses class="flex space-x-0.5 items-baseline p-2 rounded bg-card border border-border
+                  md:h-10">
       <span class="text-sm mr-2 font-semibold shrink-0">Weak against:</span>
-      <div class="flex flex-wrap gap-1 leading-none items-start">
+      <div class="flex flex-wrap gap-1 leading-none items-start px-1 bg-card/60">
         {@render manyTypesBlock(typeWeaknesses)}
       </div>
     </weaknesses>
