@@ -46,7 +46,7 @@
       <Select.Root type="single"
                     name="sort"
                     bind:value={sortValue}>
-        <Select.Trigger class="w-2/3 rounded-r-xs">
+        <Select.Trigger class="w-2/3 rounded-r-xs bg-card">
           {sortTriggerContent}
         </Select.Trigger>
         <Select.Content>
@@ -60,7 +60,7 @@
       <Select.Root type="single"
                     name="order"
                     bind:value={sortOrder}>
-        <Select.Trigger class="w-1/3 rounded-l-xs">
+        <Select.Trigger class="w-1/3 rounded-l-xs bg-card">
           {#if isSortAscending}
             <Ascending/>
             <span class="truncate">
@@ -86,7 +86,7 @@
     <Select.Root type="single"
                   name="filter"
                   bind:value={filterValue} >
-      <Select.Trigger class="w-2/5">
+      <Select.Trigger class="w-2/5 bg-card">
         Filter by {filterTriggerContent}
       </Select.Trigger>
       <Select.Content>
