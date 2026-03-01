@@ -4,24 +4,25 @@
   --font-mono: "SpaceMono", monospace;
 
   --radius: 0.5rem;
-  --background: oklch(0.98 0.01 240);
-  --foreground: oklch(0.25 0.03 240);
-  --card: oklch(0.99 0.005 240);
-  --card-foreground: oklch(0.25 0.03 240);
-  --popover: oklch(0.99 0.005 240);
-  --popover-foreground: oklch(0.25 0.03 240);
-  --primary: oklch(0.60 0.20 25);
+  --background: oklch(0.98 0.008 240);
+  --foreground: oklch(0.20 0.04 240); /* Darker for better text depth */
+  --card: oklch(1 0 0); /* Pure white for "lift" */
+  --card-foreground: oklch(0.20 0.04 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.04 240);
+  --primary: oklch(0.55 0.18 25); 
   --primary-foreground: oklch(0.99 0.01 25);
-  --secondary: oklch(0.85 0.03 240);
-  --secondary-foreground: oklch(0.35 0.05 240);
-  --muted: oklch(0.94 0.02 240);
-  --muted-foreground: oklch(0.50 0.04 240);
-  --accent: oklch(0.80 0.15 145);
-  --accent-foreground: oklch(0.25 0.05 145);
-  --destructive: oklch(0.55 0.22 28);
-  --border: oklch(0.92 0.02 240);
-  --input: oklch(0.96 0.01 240);
-  --ring: oklch(0.60 0.20 25);
+  --secondary: oklch(0.92 0.02 240);
+  --secondary-foreground: oklch(0.30 0.05 240);
+  --muted: oklch(0.95 0.015 240);
+  --muted-foreground: oklch(0.45 0.04 240);
+  --accent: oklch(0.85 0.16 145);
+  --accent-foreground: oklch(0.25 0.08 145);
+  --destructive: oklch(0.50 0.20 28);
+  --border: oklch(0.88 0.03 240); /* Thicker looking borders */
+  --input: oklch(0.97 0.01 240);
+  --ring: oklch(0.55 0.18 25);
+
   --sidebar: oklch(0.96 0.015 240);
   --sidebar-foreground: oklch(0.30 0.04 240);
   --sidebar-primary: oklch(0.60 0.20 25);
@@ -31,25 +32,26 @@
   --sidebar-border: oklch(0.91 0.02 240);
   --sidebar-ring: oklch(0.60 0.20 25);
   
-  /* Pokémon Type Variables - OKLCH Pastel Set */
-  --type-normal: oklch(0.82 0.03 70);    /* Soft Beige-Grey */
-  --type-fire: oklch(0.75 0.12 35);      /* Muted Coral Red */
-  --type-water: oklch(0.78 0.10 230);    /* Soft Cerulean */
-  --type-grass: oklch(0.82 0.12 145);    /* Soft Meadow Green (Matches Logo LED) */
-  --type-electric: oklch(0.88 0.12 95);  /* Soft Canary Yellow */
-  --type-ice: oklch(0.85 0.08 195);      /* Cyan-Tinted White */
-  --type-fighting: oklch(0.68 0.11 25);  /* Desaturated Terracotta */
-  --type-poison: oklch(0.72 0.10 310);   /* Dusty Orchid */
-  --type-ground: oklch(0.78 0.08 75);    /* Pale Sandstone */
-  --type-flying: oklch(0.84 0.07 250);   /* Sky Blue-Lavender */
-  --type-psychic: oklch(0.76 0.13 345);  /* Pastel Rose */
-  --type-bug: oklch(0.82 0.11 115);      /* Pale Olive-Lime */
-  --type-rock: oklch(0.72 0.06 80);      /* Dusty Warm Grey */
-  --type-ghost: oklch(0.65 0.09 285);    /* Muted Indigo-Purple */
-  --type-dragon: oklch(0.68 0.12 265);   /* Soft Royal Purple */
-  --type-steel: oklch(0.85 0.03 240);    /* Logo Casing Grey */
-  --type-dark: oklch(0.45 0.05 270);     /* Deep Slate (Darkest of the set) */
-  --type-fairy: oklch(0.85 0.10 5);      /* Sylveon Pink */
+  /* TYPE SYSTEM: Increased Chroma (C) by ~20% and adjusted Lightness (L) 
+     for a "Gummy" or "Crystal" depth effect */
+  --type-normal: oklch(0.78 0.05 70);    
+  --type-fire: oklch(0.68 0.16 35);      
+  --type-water: oklch(0.72 0.14 230);    
+  --type-grass: oklch(0.78 0.16 145);    
+  --type-electric: oklch(0.85 0.18 95);  
+  --type-ice: oklch(0.82 0.12 195);      
+  --type-fighting: oklch(0.62 0.15 25);  
+  --type-poison: oklch(0.65 0.14 310);   
+  --type-ground: oklch(0.72 0.12 75);    
+  --type-flying: oklch(0.80 0.11 250);   
+  --type-psychic: oklch(0.72 0.18 345);  
+  --type-bug: oklch(0.76 0.16 115);      
+  --type-rock: oklch(0.65 0.08 80);      
+  --type-ghost: oklch(0.58 0.12 285);    
+  --type-dragon: oklch(0.62 0.16 265);   
+  --type-steel: oklch(0.75 0.04 240);    
+  --type-dark: oklch(0.40 0.07 270);     
+  --type-fairy: oklch(0.80 0.14 5);
 }
 
 @theme inline {
