@@ -1,7 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { BASE_FETCH_LINK, MAX_COUNT } from "@/constants";
-import type { NameIdPair } from "@/types";
 
 
 export function cn(...inputs: ClassValue[]) {
@@ -35,17 +33,3 @@ export const titleCase = (str: string) => (str.replace(/-/g, " ")
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
 );
-
-
-/* ================ API Functions ================*/
-export async function fetchNameIdPairs() {
-  const response = await fetch(`${BASE_FETCH_LINK}/?offset=0&limit=${MAX_COUNT}`);
-  const data = await response.json();
-
-  const returnableList: NameIdPair[] = [];
-
-  for (const item of data.results)
-    returnableList.push({...item, id: Number(getIdFromUrl(item.url))} as NameIdPair);
-
-  return returnableList;
-}
