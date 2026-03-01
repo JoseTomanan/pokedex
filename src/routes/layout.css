@@ -124,10 +124,9 @@
     right: 0;
     top: 0;
     z-index: 30;
-    padding: 1rem;
+    padding: 0.625rem;
     @apply shadow;
-    @apply bg-sidebar/90;
-    @apply backdrop-blur-sm;
+    @apply bg-sidebar;
     color: var(--color-sidebar-foreground);
 
     @apply transition-colors duration-200;
@@ -135,7 +134,6 @@
     & > .header-links {
       & a {
         @apply text-accent-foreground;
-        @apply transition-colors duration-200;
         @apply hover:text-primary;
       }
     }
