@@ -48,8 +48,8 @@
 
 
 <Dialog.Root bind:open={isDialogOpen}>
-  <Dialog.Trigger class={`card group ${ringColor} flex flex-col items-center overflow-clip transition
-                    hover:ring-2 hover:bg hover:border-card`}>
+  <Dialog.Trigger class={`bg-card card group ${ringColor} flex flex-col items-center overflow-clip transition
+                    hover:ring-2 hover:border-card`}>
     <div class="flex flex-row justify-between items-center gap-1 w-full">
       <h4 class="font-semibold">
         {nameCase(name)}
