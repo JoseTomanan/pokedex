@@ -27,11 +27,13 @@
     <img src={pokeball}
           alt="Logo"
           class="size-8 slow-spin"/>
-    <span class="hidden sm:flex sm:flex-col">
-      <h3 class="-mb-1.25 font-semibold group-hover:text-primary">
+    <span class="-my-0.5 hidden sm:flex sm:flex-col *:leading-none">
+      <h3 class="-mb-0.25 font-semibold group-hover:text-primary">
         Oak's Assistant
       </h3>
-      <h5 class="-mt-1.25 group-hover:opacity-100">Made for Professor Oak</h5>
+      <h5 class="-mt-0.25 group-hover:opacity-100">
+        Made for Professor Oak
+      </h5>
     </span>
   </button>
   <div class="space-x-4 tracking-tight header-links">
