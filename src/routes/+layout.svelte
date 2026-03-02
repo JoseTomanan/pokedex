@@ -11,9 +11,9 @@
   <title>Oak's Assistant</title>
 </svelte:head>
 
-<div class="flex justify-center bg-fixed min-h-[92vh]">
+<div class="flex justify-center bg-fixed min-h-[91vh]">
   <NavBar/>
-  <div class="pt-15 container">
+  <div class="pt-13 container">
     {@render children()}
   </div>
 </div>
