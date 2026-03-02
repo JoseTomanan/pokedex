@@ -147,12 +147,10 @@
     right: 0;
     top: 0;
     z-index: 30;
-    padding: 0.625rem;
+    padding: 0.75rem;
     @apply shadow;
     @apply bg-sidebar;
     color: var(--color-sidebar-foreground);
-
-    @apply transition-colors duration-200;
 
     & > .header-links {
       & a {
