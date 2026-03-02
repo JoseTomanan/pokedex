@@ -91,11 +91,11 @@
     border: 2px solid var(--border);
   }
   ::-webkit-scrollbar-thumb {
-    background: color-mix(in oklab, var(--muted-foreground) 70%, transparent 30%);
+    background: var(--muted-foreground);
     min-height: 28px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--muted-foreground);
+    background: color-mix(in oklab, var(--muted-foreground) 70%, transparent 30%);
   }
   ::-webkit-scrollbar-corner {
     background: var(--background);
