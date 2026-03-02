@@ -149,7 +149,7 @@
 </script>
 
 
-<div class="p-4 space-y-3">
+<div class="p-4 space-y-2">
   <SearchBar bind:searchQuery
           bind:filterValue
           bind:sortValue
