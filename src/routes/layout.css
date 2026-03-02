@@ -76,6 +76,8 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    overflow-y: scroll !important;
   }
 
   ::-webkit-scrollbar {
@@ -83,29 +85,20 @@
     min-width: 7px;
     max-width: 7px;
     background: var(--muted);
-    display: block !important;
   }
   ::-webkit-scrollbar-track {
     background: var(--muted);
     border: 2px solid var(--border);
-    display: block !important;
   }
   ::-webkit-scrollbar-thumb {
     background: color-mix(in oklab, var(--muted-foreground) 70%, transparent 30%);
     min-height: 28px;
-    display: block !important;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
-    display: block !important;
   }
   ::-webkit-scrollbar-corner {
     background: var(--background);
-    display: block !important;
-  }
-  /* Always show vertical scrollbar for stability */
-  html {
-    overflow-y: scroll !important;
   }
 
   body {
