@@ -86,6 +86,7 @@
 </script>
 
 
+
 {#snippet manyTypesBlock(types: string[])}
   {#each types as type}
     {@const bgColor = TYPE_BG_COLORS[type as keyof typeof TYPE_BG_COLORS]}
@@ -147,25 +148,22 @@
   </div>
 
   <pokemon-details class="flex flex-col justify-between space-y-1">
-    <div class="flex flex-row gap-1 w-full">
-      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
-                    [&>h6]:font-medium [&>p]:font-light">
+    <div class="flex flex-row gap-1 w-full
+                          *:h-fit *:-space-y-0.5 *:leading-none *:flex *:flex-col *:items-center *:flex-1
+                          [&>*>h6]:font-medium [&>*>p]:font-light">
+      <div class="card">
         <h6>HEIGHT</h6>
         <p>{(details.height * 0.10).toFixed(1)} m</p>
       </div>
-      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
-                    [&>h6]:font-medium [&>p]:font-light">
+      <div class="card">
         <h6>WEIGHT</h6>
         <p>{details.weight} kg</p>
       </div>
-      <div class="card h-fit -space-y-0.5 leading-0 text-center flex-1
-                    [&>h6]:font-medium [&>p]:font-light">
+      <div class="card">
         <h6>ABILITY</h6>
         <p class="truncate">{nameCase(details.abilities[0].ability.name)}</p>
       </div>
-      <div class="hidden xs:flex xs:flex-col
-                    card h-fit -space-y-0.5 leading-0 text-center flex-1
-                    [&>h6]:font-medium [&>p]:font-light">
+      <div class="card hidden! xs:flex! xs:flex-col!">
         <h6>ORDER</h6>
         <p>{details.order}</p>
       </div>
@@ -178,7 +176,7 @@
             <span class="flex flex-row gap-2 items-center">
               <span class="flex flex-row items-center justify-between gap-x-1 flex-1">
                 <h6 class="font-semibold">{s.stat.name == "hp" ? "HP" : titleCase(s.stat.name)}</h6>
-                <h6 class="font-light">{s.base_stat}</h6>
+                <p class="font-light">{s.base_stat}</p>
               </span>
               <Progress value={s.base_stat}
                     max={255}
