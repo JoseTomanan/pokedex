@@ -3,6 +3,8 @@
   --font-sans: "Mulish", sans-serif;
   --font-mono: "SpaceMono", monospace;
 
+  --breakpoint-xs: 480px;
+
   --radius: 0.5rem;
   --background: oklch(0.99 0.005 250);
   --foreground: oklch(0.20 0.04 240); /* Darker for better text depth */
