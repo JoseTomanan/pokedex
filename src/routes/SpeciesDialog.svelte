@@ -96,6 +96,17 @@
   {/each}
 {/snippet}
 
+<!-- FIXME: Skeleton not acting like a text; jiggles even if same height as text-xs.
+        I believe it's something about line-height -->
+<!-- TODO: use (because it is not being used right now) -->
+{#snippet skeletonIfLoading(displayable: string, evaluable: string | number)}
+  {#if (typeof evaluable === 'number' && evaluable < 0) || (evaluable == " ")}
+    <Skeleton class="grayscale-100 h-3 w-8 rounded-none inline-block align-middle"/>
+  {:else}
+    <p>{displayable}</p>
+  {/if}
+{/snippet}
+
 
 <Dialog.Content class="border-none flex flex-col justify-start h-158
             xs:h-148">
