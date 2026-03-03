@@ -168,7 +168,7 @@
       </div>
       <div class="card">
         <h6>WEIGHT</h6>
-        <p>{details.weight} kg</p>
+        <p>{(details.weight * 0.10).toFixed(1)} kg</p>
       </div>
       <div class="card">
         <h6>ABILITY</h6>
