@@ -11,6 +11,7 @@
   <title>Oak's Assistant</title>
 </svelte:head>
 
+<span id="top" class="-mt-4 -z-100"></span>
 <div class="flex justify-center bg-fixed min-h-[91vh]">
   <NavBar/>
   <div class="pt-13 container">

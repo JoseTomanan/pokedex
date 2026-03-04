@@ -1,29 +1,10 @@
 <script lang="ts">
   import pokeball from '$lib/assets/pokeball.svg';
-
-  function scrollToTop() {
-    const start = window.scrollY;
-    const duration = 200;
-    const startTime = performance.now();
-
-    function animateScroll(currentTime: number) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-
-      window.scrollTo(0, start * (1 - ease(progress)));
-
-      if (progress < 1)
-        requestAnimationFrame(animateScroll);
-    }
-
-    requestAnimationFrame(animateScroll);
-  }
 </script>
 
 <nav class="flex flex-row justify-between items-center">
-  <button class="group flex flex-row gap-2 justify-center items-center text-left cursor-pointer"
-        onclick={scrollToTop}>
+  <a class="group flex flex-row gap-2 justify-center items-center text-left cursor-pointer"
+        href="#top">
     <img src={pokeball}
           alt="Logo"
           class="size-8 slow-spin"/>
@@ -35,7 +16,7 @@
         Made for Professor Oak
       </h5>
     </span>
-  </button>
+  </a>
   <div class="space-x-4 tracking-tight header-links">
     <a href="https://pokeapi.co/docs/v2">PokéAPI</a>
     <a href="https://github.com/JoseTomanan/oaks-assistant">Repository</a>
