@@ -19,6 +19,6 @@
   </a>
   <div class="space-x-4 tracking-tight header-links">
     <a href="https://pokeapi.co/docs/v2">PokéAPI</a>
-    <a href="https://github.com/JoseTomanan/oaks-assistant">Repository</a>
+    <a href="https://github.com/JoseTomanan/svelte-pokedex">Repository</a>
   </div>
 </nav>
